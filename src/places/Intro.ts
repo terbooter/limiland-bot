@@ -7,6 +7,8 @@ import {UserData} from "../UserData"
 import {Game} from "../Game"
 
 export class Intro {
+    static SKIP = "Пропустить"
+
     static async draw(u: UserData) {
         if (u.place.name !== "intro") {
             console.log(`ERROR: uid=${u.uid} try draw intro but place = ${JSON.stringify(u.place)}`)
@@ -15,7 +17,7 @@ export class Intro {
 
         let e = intros[u.place.step]
         let m = `${e.text}`
-        await send(u.uid, m, [[e.button]])
+        await send(u.uid, m, [[e.button], [Intro.SKIP]])
     }
 
     static async exec(ctx: LContext): Promise<boolean> {
@@ -59,7 +61,7 @@ export class Intro {
             return true
         }
 
-        if (t === intros[intros.length - 1].button) {
+        if (t === intros[intros.length - 1].button || t === Intro.SKIP) {
             u.place = {
                 name: "zero",
                 last_level: 1

@@ -11,6 +11,7 @@ import {Intro} from "./places/Intro"
 import {Game} from "./Game"
 import {Zero} from "./places/Zero"
 import {Zone} from "./places/Zone"
+import {MOB} from "./MOB"
 
 require("dotenv").config()
 
@@ -141,6 +142,10 @@ bot.on(message("text"), async (ctx) => {
     }
 
     if (await Zone.exec(ctx)) {
+        return
+    }
+
+    if (await MOB.exec(ctx)) {
         return
     }
 })

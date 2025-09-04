@@ -25,6 +25,7 @@ export class Zone {
                     name: "mob",
                     mob: MOB.getMob(1),
                     round: 0,
+                    attack_boost: 0,
                     win_place: {
                         name: "zone",
                         level: u.place.level
@@ -85,6 +86,7 @@ export class Zone {
         User.restoreBars(u)
 
         let m = `🌀 ${u.place.level} Круг | Спираль\n`
+        m += User.getStatusBar(u)
         await send(u.uid, m, [[Zone.GO_FURTHER], [Zone.GO_ZERO]])
     }
 }
