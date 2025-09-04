@@ -57,7 +57,7 @@ export class Admin {
             return true
         }
 
-        if (t === "/delete_my_account_from_game") {
+        if (t === "/delete_my_account_from_game" || t === "/rs") {
             const allowedUids = Config.ADMIN_UIDS
             if (allowedUids.indexOf(uid) == -1) {
                 await s(uid, `uid=${uid} not allowed`)
@@ -65,7 +65,7 @@ export class Admin {
             }
             const tid = uid
             await DB.query("DELETE FROM users WHERE uid = $1", [tid])
-            await DB.query("DELETE FROM locations WHERE uid = $1", [tid])
+            await DB.query("DELETE FROM objects WHERE uid = $1", [tid])
             await DB.query("DELETE FROM counters WHERE uid = $1", [tid])
             // @ts-ignore
             delete ctx.u

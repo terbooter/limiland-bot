@@ -8,13 +8,12 @@ export type UserData = {
     old_username?: string
 
     hp: number
-    max_hp: number
-    mp: number
-    max_mp: number
+    ap: number
 
     vitality: number
     strength: number
     intellect: number
+    dexterity: number
 
     role?: "leader"
 
@@ -28,7 +27,17 @@ export type UserData = {
     chips: number
     losable_chips: number
     limi: number
-    place: any
+    place: IntroPlace
 
     m?: string
+}
+
+export type Place = {
+    level: number
+    timestamp: number
+}
+
+export type IntroPlace = {
+    name: "intro"
+    step: number
 }

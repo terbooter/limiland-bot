@@ -7,6 +7,7 @@ import {logDate} from "./functions"
 import {User} from "./User"
 import {message} from "telegraf/filters"
 import {Admin} from "./Admin"
+import {Intro} from "./places/Intro"
 
 require("dotenv").config()
 
@@ -124,9 +125,9 @@ bot.on(message("text"), async (ctx) => {
     if (await Admin.exec(ctx)) {
         return
     }
-    // if (await Intro.exec(ctx)) {
-    //     return
-    // }
+    if (await Intro.exec(ctx)) {
+        return
+    }
     // if (await Zero.exec(ctx)) {
     //     return
     // }

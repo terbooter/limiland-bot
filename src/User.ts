@@ -9,9 +9,9 @@ export class User {
 
     static createNew(from: TG_User): UserData {
         let u: UserData = {
+            ap: 0,
+            dexterity: 0,
             intellect: 0,
-            max_mp: 0,
-            mp: 0,
             vitality: 0,
             uid: from.id,
             // short_uid: uid2shortUid(ctx.uid),
@@ -19,7 +19,6 @@ export class User {
             first_name: from.first_name,
             last_name: from.last_name,
             username: from.username,
-            max_hp: Config.INTRO_MAX_HP,
             hp: Config.INTRO_MAX_HP,
             strength: Config.INTRO_STRENGTH,
 
@@ -33,5 +32,25 @@ export class User {
         }
 
         return u
+    }
+
+    static getMaxAP(u: UserData): number {
+        return u.dexterity * 1
+    }
+
+    static getMaxHP(u: UserData): number {
+        return u.vitality * 5
+    }
+
+    static getDamage(u: UserData): number {
+        return u.strength
+    }
+
+    static getArmor(u: UserData): number {
+        return Math.floor(u.vitality / 10)
+    }
+
+    static getName(u: UserData): string {
+        return u.first_name
     }
 }
