@@ -8,6 +8,9 @@ import {User} from "./User"
 import {message} from "telegraf/filters"
 import {Admin} from "./Admin"
 import {Intro} from "./places/Intro"
+import {Game} from "./Game"
+import {Zero} from "./places/Zero"
+import {Zone} from "./places/Zone"
 
 require("dotenv").config()
 
@@ -20,6 +23,7 @@ const bot = new Telegraf<LContext>(process.env.BOT_TOKEN as string)
 async function main() {
     TG.init(bot)
     DB.connect()
+    await User.load()
 
     const expressApp = new ExpressApp()
 
@@ -128,13 +132,17 @@ bot.on(message("text"), async (ctx) => {
     if (await Intro.exec(ctx)) {
         return
     }
-    // if (await Zero.exec(ctx)) {
-    //     return
-    // }
-    //
-    // if (await Help.exec(ctx)) {
-    //     return
-    // }
+    if (await Zero.exec(ctx)) {
+        return
+    }
+
+    if (await User.exec(ctx)) {
+        return
+    }
+
+    if (await Zone.exec(ctx)) {
+        return
+    }
 })
 
 bot.on("callback_query", async (ctx) => {
@@ -152,6 +160,35 @@ bot.on("callback_query", async (ctx) => {
 })
 
 main()
+setInterval(checkTimers, 2000)
+
+async function checkTimers() {
+    for (let uid in User.all) {
+        let u = User.all[uid]
+
+        if (u.place.name !== "timer") {
+            continue
+        }
+
+        console.log(u)
+
+        const timer = u.place
+
+        if (timer.scheduledAt < Date.now() && !timer.beginExecutionAt) {
+            timer.beginExecutionAt = Date.now()
+
+            u.place = timer.target_place
+            await Game.draw(u)
+
+            if (u.m) {
+                let r = await TG.s(u.uid, u.m)
+                delete u.m
+            }
+
+            await DB.saveUser(u, false)
+        }
+    }
+}
 
 export interface LContext extends Context {
     uid: number

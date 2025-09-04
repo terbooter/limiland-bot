@@ -27,7 +27,7 @@ export type UserData = {
     chips: number
     losable_chips: number
     limi: number
-    place: IntroPlace
+    place: IntroPlace | ZeroPlace | ZonePlace | TimerPlace
 
     m?: string
 }
@@ -40,4 +40,29 @@ export type Place = {
 export type IntroPlace = {
     name: "intro"
     step: number
+}
+
+export type ZeroPlace = {
+    name: "zero"
+    last_level: number
+}
+
+export type ZonePlace = {
+    name: "zone"
+    level: number
+}
+
+export type MobPlace = {
+    name: "mob"
+    win_place: TimerPlace
+    loose_place: TimerPlace
+}
+
+export type TimerPlace = {
+    name: "timer"
+    description: string
+    target_place: ZonePlace
+    startedAt: number
+    beginExecutionAt?: number
+    scheduledAt: number
 }

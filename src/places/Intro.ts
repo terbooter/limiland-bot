@@ -1,12 +1,18 @@
 import {LContext} from "../server"
 import {User} from "../User"
 import {DB} from "../DB"
-import {s, send, TG} from "../TG"
+import {send, TG} from "../TG"
 import {intros} from "./intro_steps"
 import {UserData} from "../UserData"
+import {Game} from "../Game"
 
 export class Intro {
     static async draw(u: UserData) {
+        if (u.place.name !== "intro") {
+            console.log(`ERROR: uid=${u.uid} try draw intro but place = ${JSON.stringify(u.place)}`)
+            return
+        }
+
         let e = intros[u.place.step]
         let m = `${e.text}`
         await send(u.uid, m, [[e.button]])
@@ -54,7 +60,13 @@ export class Intro {
         }
 
         if (t === intros[intros.length - 1].button) {
+            u.place = {
+                name: "zero",
+                last_level: 1
+            }
+
             await send(u.uid, `Обучение завершено`)
+            await Game.draw(u)
             return true
         }
 

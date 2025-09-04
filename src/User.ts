@@ -1,6 +1,9 @@
 import {UserData} from "./UserData"
 import {TG_User} from "./TG"
 import {Config} from "./Config"
+import {LContext} from "./server"
+import {Game} from "./Game"
+import {DB} from "./DB"
 
 export class User {
     static all: {[uid: number]: UserData} = {}
@@ -32,6 +35,40 @@ export class User {
         }
 
         return u
+    }
+
+    static async load() {
+        await User.loadAllUsers()
+    }
+
+    static async loadAllUsers(): Promise<void> {
+        const sql = `SELECT *
+                     FROM users
+                     order by created_at`
+        let r = await DB.query(sql)
+
+        for (let row of r.rows) {
+            let u: UserData = row.data
+            u = User.injectNewParams(u)
+            // console.log(`${u.uid} ${u.first_name} ${User.getPower(u)}`)
+
+            User.all[row.uid] = u
+        }
+    }
+
+    static injectNewParams(u: UserData) {
+        return u
+    }
+
+    static async exec(ctx: LContext): Promise<boolean> {
+        const {uid, u, t} = ctx
+
+        if (t === "/refresh") {
+            await Game.draw(u)
+            return true
+        }
+
+        return false
     }
 
     static getMaxAP(u: UserData): number {
