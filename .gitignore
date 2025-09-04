@@ -1,0 +1,12 @@
+/node_modules
+.idea
+tsconfig.tsbuildinfo
+.env
+*.map
+dist
+public/bundle/bundle.js
+deploy.sh
+.env-prod
+docker-compose.override.yml
+tmp
+try

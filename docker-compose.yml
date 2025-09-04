@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  main:
+    build: .
+    container_name: "limiland-bot"
+#    ports:
+#      - "8888:8888"
+    volumes:
+      - ./data:/application/data
+    restart: "always"
+    env_file: .env
+    logging:
+      driver: "json-file"
+      options:
+        max-file: 5
+        max-size: 200m
+    dns:
+      - 8.8.8.8
+      - 77.88.8.1

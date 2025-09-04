@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "@a2seven/yoo-checkout": "^1.1.4",
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.13.5",
+    "@types/pg": "^8.11.11",
+    "axios": "^1.8.1",
+    "body-parser": "^2.2.0",
+    "chalk": "^4.1.2",
+    "cron": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.13.3",
+    "prettier": "^3.5.3",
+    "telegraf": "^4.16.3",
+    "ts-node": "^10.9.2",
+    "yaml": "^2.7.0"
+  },
+  "name": "limland-bot",
+  "version": "1.0.0",
+  "main": "prettier.config.js",
+  "scripts": {
+    "server": "node ./dist/server.js",
+    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@swc/cli": "^0.6.0",
+    "@swc/core": "^1.11.4"
+  }
+}
