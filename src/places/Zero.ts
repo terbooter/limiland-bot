@@ -2,13 +2,13 @@ import {UserData} from "../UserData"
 import {send} from "../TG"
 import {LContext} from "../server"
 import {Game} from "../Game"
+import {User} from "../User"
 
 export class Zero {
     static TO_ZONE = "🚧В Путь"
     static MEDIC = "🏥Медик"
     static ENGINEER = "🛠️Инженер"
     static JOB = "♻ Работа"
-    static PAD = "👤Я"
     static OWL = "🦉Сов"
     static SHOP = "🏪Магазин"
     static ZERO = "🌐Зероград"
@@ -48,6 +48,6 @@ export class Zero {
 
         let m = `🌐Зероград\n`
         m += `Центр Великой Спирали`
-        await send(u.uid, m, [[Zero.TO_ZONE], [Zero.PAD]])
+        await send(u.uid, m, [[Zero.TO_ZONE], [User.ME]])
     }
 }

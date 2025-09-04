@@ -82,6 +82,8 @@ export class Zone {
             return
         }
 
+        User.restoreBars(u)
+
         let m = `🌀 ${u.place.level} Круг | Спираль\n`
         await send(u.uid, m, [[Zone.GO_FURTHER], [Zone.GO_ZERO]])
     }

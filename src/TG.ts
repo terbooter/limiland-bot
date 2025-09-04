@@ -3,13 +3,25 @@ import {LContext} from "./server"
 import {DB} from "./DB"
 import {logDate} from "./functions"
 import {Util} from "./Util"
+import {UserData} from "./UserData"
 
 export async function s(uid: number, text: string, keyboard?: any): Promise<number> {
     return await TG.s(uid, text, keyboard)
 }
 
-export async function send(uid: number, text: string, buttons?: string[][]): Promise<number> {
-    return await TG.send(uid, text, buttons)
+export async function send(
+    uid: number | UserData,
+    text: string,
+    buttons?: string[][]
+): Promise<number> {
+    let real_uid
+    if (Number.isInteger(uid)) {
+        real_uid = uid
+    } else {
+        real_uid = (uid as unknown as UserData).uid
+    }
+
+    return await TG.send(real_uid, text, buttons)
 }
 
 export class TG {
