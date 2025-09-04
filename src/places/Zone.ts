@@ -1,7 +1,9 @@
 import {LContext} from "../server"
-import {UserData} from "../UserData"
+import {MobPlace, Place, UserData} from "../UserData"
 import {send} from "../TG"
 import {Game} from "../Game"
+import {User} from "../User"
+import {MOB} from "../MOB"
 
 export class Zone {
     static GO_FURTHER = "👣Исследовать"
@@ -15,15 +17,55 @@ export class Zone {
         }
 
         if (t === Zone.GO_FURTHER) {
+            let target_place: any
+
+            let r = User.nextRand("main", u)
+            if (r === "mob") {
+                let mob_place: MobPlace = {
+                    name: "mob",
+                    mob: MOB.getMob(1),
+                    round: 0,
+                    win_place: {
+                        name: "zone",
+                        level: u.place.level
+                    },
+                    loose_place: {
+                        name: "zero",
+                        last_level: u.place.level
+                    }
+                }
+
+                target_place = mob_place
+            } else {
+                target_place = {
+                    name: "zone",
+                    level: u.place.level
+                }
+            }
+
             const idle = 2
             u.place = {
                 name: "timer",
                 startedAt: Date.now(),
                 scheduledAt: Date.now() + idle * 1_000,
                 description: `⏳[${idle} сек.] Исследуешь круг ...`,
+                target_place: target_place
+            }
+
+            await Game.draw(u)
+            return true
+        }
+
+        if (t === Zone.GO_ZERO) {
+            const idle = 2
+            u.place = {
+                name: "timer",
+                startedAt: Date.now(),
+                scheduledAt: Date.now() + idle * 1_000,
+                description: `⏳[${idle} сек.] Возвращаешься ...`,
                 target_place: {
-                    name: "zone",
-                    level: u.place.level
+                    name: "zero",
+                    last_level: u.place.level
                 }
             }
 

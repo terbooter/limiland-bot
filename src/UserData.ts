@@ -1,3 +1,5 @@
+import {Mob} from "./MOB"
+
 export type UserData = {
     uid: number
     short_uid: string
@@ -27,15 +29,16 @@ export type UserData = {
     chips: number
     losable_chips: number
     limi: number
-    place: IntroPlace | ZeroPlace | ZonePlace | TimerPlace
+    place: IntroPlace | ZeroPlace | ZonePlace | TimerPlace | MobPlace
+
+    rand: {
+        main: number
+    }
 
     m?: string
 }
 
-export type Place = {
-    level: number
-    timestamp: number
-}
+export type Place = IntroPlace | ZeroPlace | ZonePlace | TimerPlace
 
 export type IntroPlace = {
     name: "intro"
@@ -54,14 +57,16 @@ export type ZonePlace = {
 
 export type MobPlace = {
     name: "mob"
-    win_place: TimerPlace
-    loose_place: TimerPlace
+    mob: Mob
+    round: number
+    win_place: TimerPlace | ZonePlace
+    loose_place: TimerPlace | ZeroPlace
 }
 
 export type TimerPlace = {
     name: "timer"
     description: string
-    target_place: ZonePlace
+    target_place: ZonePlace | ZeroPlace | MobPlace
     startedAt: number
     beginExecutionAt?: number
     scheduledAt: number

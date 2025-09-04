@@ -4,6 +4,8 @@ import {Config} from "./Config"
 import {LContext} from "./server"
 import {Game} from "./Game"
 import {DB} from "./DB"
+import {r100} from "./functions"
+import {Rand} from "./Rand"
 
 export class User {
     static all: {[uid: number]: UserData} = {}
@@ -12,6 +14,7 @@ export class User {
 
     static createNew(from: TG_User): UserData {
         let u: UserData = {
+            rand: {main: 0},
             ap: 0,
             dexterity: 0,
             intellect: 0,
@@ -89,5 +92,18 @@ export class User {
 
     static getName(u: UserData): string {
         return u.first_name
+    }
+
+    static nextRand(name: keyof UserData["rand"], u: UserData): string {
+        if (r100(1)) {
+            console.log(`Skip moving rand: ${name}`)
+        }
+
+        u.rand[name]++
+        if (u.rand[name] >= Rand[name].length) {
+            u.rand[name] = 0
+        }
+
+        return Rand[name][u.rand[name]]
     }
 }
