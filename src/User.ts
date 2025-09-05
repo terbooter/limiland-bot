@@ -1,11 +1,11 @@
 import {UserData} from "./UserData"
 import {send, TG_User} from "./TG"
-import {Config} from "./Config"
 import {LContext} from "./server"
 import {Game} from "./Game"
 import {DB} from "./DB"
 import {r100} from "./functions"
 import {Rand} from "./Rand"
+import {Items} from "./Items"
 
 export class User {
     static all: {[uid: number]: UserData} = {}
@@ -41,7 +41,8 @@ export class User {
             place: {
                 name: "intro",
                 step: 0
-            }
+            },
+            items: {}
         }
 
         return u
@@ -86,6 +87,18 @@ export class User {
             m += `Сила: ${strength}\n`
             m += `Ловкость: ${dexterity}\n`
             m += `Ум: ${intellect}\n`
+
+            await send(u, m, [[User.BAG], [User.BACK_BUTTON]])
+            return true
+        }
+
+        if (t === "/bag" || t === User.BAG) {
+            let m = `<b>Сумка:</b>\n`
+
+            for (const id in u.items) {
+                const item = Items.all[id]
+                m += `▫️${item.pic}${item.name}(x${u.items[id]})\n`
+            }
 
             await send(u, m, [[User.BACK_BUTTON]])
             return true
@@ -142,5 +155,54 @@ export class User {
         }
 
         return Rand[name][u.rand[name]]
+    }
+
+    static addItem(u: UserData, id: number, count: number = 1) {
+        if (!u.items[id]) {
+            u.items[id] = 0
+        }
+
+        u.items[id] += count
+    }
+
+    static remItem(u: UserData, id: number, count: number = 1) {
+        if (!u.items[id]) {
+            console.log(`ERROR: trying to rem item id =${id} from uid=${u.uid} but no such item`)
+            return
+        }
+
+        if (u.items[id] < count) {
+            console.log(
+                `ERROR: trying to rem item id =${id} from uid=${u.uid} but user has only ${u.items[id]}`
+            )
+            return
+        }
+
+        u.items[id] -= count
+
+        if (u.items[id] === 0) {
+            delete u.items[id]
+        }
+    }
+
+    static getItemsCount(u: UserData, id: number): number {
+        if (!u.items[id]) {
+            return 0
+        }
+
+        return u.items[id]
+    }
+
+    static giveReward(u: UserData, items: {item_id: number; count: number}[]): string {
+        let arr: string[] = []
+        for (const e of items) {
+            const item = Items.all[e.item_id]
+            arr.push(`<b>+${e.count}${item.pic}${item.name}</b>`)
+            User.addItem(u, e.item_id, e.count)
+        }
+
+        let m = `Получено:\n`
+        m += ` ${arr.join(", ")}`
+        return m
     }
 }

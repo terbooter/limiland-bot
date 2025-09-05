@@ -91,6 +91,16 @@ export class Zone {
                 }
             }
             u.level++
+            if (u.level > u.max_level) {
+                u.max_level = u.level
+                let m = `🌀Ты открыл путь на новый круг Спирали\n\n`
+                m += User.giveReward(u, [
+                    {item_id: 3, count: 1},
+                    {item_id: 2, count: 3}
+                ])
+
+                await send(uid, m)
+            }
 
             await Game.draw(u)
             return true

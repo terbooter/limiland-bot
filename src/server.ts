@@ -14,6 +14,7 @@ import {Zone} from "./places/Zone"
 import {MOB} from "./MOB"
 import {Talk} from "./places/Talk"
 import {Rand} from "./Rand"
+import {Items} from "./Items"
 
 require("dotenv").config()
 
@@ -29,6 +30,7 @@ async function main() {
     await Talk.load()
     await User.load()
     await MOB.load()
+    await Items.load()
     Rand.load()
 
     const expressApp = new ExpressApp()

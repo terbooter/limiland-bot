@@ -1,0 +1,17 @@
+- pic: 🧩
+  id: 1
+  name: Чип
+
+- pic: 💎
+  id: 2
+  name: Лими
+
+- pic: 🔮
+  id: 3
+  name: Шар улучшения
+  usable: true
+
+- pic: 🔑
+  id: 780
+  name: Ключик
+  activation: false

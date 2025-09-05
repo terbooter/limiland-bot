@@ -39,6 +39,8 @@ export type UserData = {
         talk: number
     }
 
+    items: {[id: string]: number}
+
     m?: string
 }
 
