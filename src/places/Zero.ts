@@ -26,7 +26,7 @@ export class Zero {
                 name: "timer",
                 startedAt: Date.now(),
                 scheduledAt: Date.now() + idle * 1_000,
-                description: `⏳[${idle} сек.] Идем по спирали ...`,
+                description: `⏳[${idle} сек.] Телепорт на ${u.level} Круг ...`,
                 target_place: {
                     name: "zone"
                 }

@@ -66,8 +66,8 @@ export type MobPlace = {
     m?: string
     boost: number
     boost_count: number
-    win_place: TimerPlace | ZonePlace
-    loose_place: TimerPlace | ZeroPlace
+    win_place: TimerPlace | ZonePlace | TalkPlace
+    loose_place: TimerPlace | ZeroPlace | TalkPlace
 }
 
 export type TalkPlace = {
@@ -79,19 +79,35 @@ export type TalkPlace = {
     line3?: PlaceButton[]
 }
 
+export type PlaceTarget = {
+    saga: string
+    id: string
+}
+
 export type PlaceButton = {
     label: string
     actions: string[]
-    target: {
-        saga: string
-        id: string
-    }
+    next:
+        | {
+              type: "click"
+              target: PlaceTarget
+          }
+        | {
+              type: "mob"
+              win_target: PlaceTarget
+          }
+        | {
+              type: "timer"
+              delay: number
+              message: string
+              target: PlaceTarget
+          }
 }
 
 export type TimerPlace = {
     name: "timer"
     description: string
-    target_place: ZonePlace | ZeroPlace | MobPlace
+    target_place: ZonePlace | ZeroPlace | MobPlace | TalkPlace
     startedAt: number
     beginExecutionAt?: number
     scheduledAt: number

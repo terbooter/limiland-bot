@@ -130,13 +130,17 @@ export class Zone {
 
             target_place = mob_place
         } else if (r === "talk") {
-            let r = User.nextRand("talk", u)
-            target_place = Talk.getPlace(r, "0")
+            let saga = User.nextRand("talk", u)
+            target_place = Talk.getPlace(saga, "0")
         } else {
             target_place = {
                 name: "zone"
             }
         }
+
+        // let saga = User.nextRand("talk", u)
+        // saga = "timer_test"
+        // target_place = Talk.getPlace(saga, "0")
 
         const idle = 2
         u.place = {

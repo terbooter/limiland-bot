@@ -43,3 +43,55 @@ bird_talk:
     line1:
       - label: Идти дальше
         target: exit
+
+cave_test:
+  0:
+    text: Впереди вход в пещеру. Что будешь делать?
+    line1:
+      - label: Остановлюсь
+        target: 1
+      - label: [ Войду,Иду внутрь ]
+        target: 2
+
+  1:
+    text: Ну что застыл, идешь внутрь? Или как?
+    line1:
+      - label: Ну нафиг
+        target: exit
+      - label: [ В пещеру ]
+        target: 2
+
+  2:
+    text: Ты вошел в пещеру, тут темно и стремно
+    line1:
+      - label: Идти вдоль стены
+        mob:
+          win_target: 3
+  3:
+    text: |-
+      Ура! Ура! Монстр повержен!
+      Забирай свою награду и топай дальше
+    line1:
+      - label: Топать дальше
+        target: exit
+
+timer_test:
+  0:
+    text: |-
+      Похоже тут спрятано что-то интересное...
+    line1:
+      - label: Поискать это что-то
+        timer:
+          delay: 10
+          target: 1
+          message: Ползаешь по земле в поисках
+
+    line2:
+      - label: Забить и пойти дальше
+        target: exit
+
+  1:
+    text: Искал-искал и ничего не нашел. Бывает
+    line1:
+      - label: Идти дальше
+        target: exit

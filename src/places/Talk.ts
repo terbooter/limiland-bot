@@ -1,11 +1,12 @@
 import {LContext} from "../server"
 import * as fs from "fs/promises"
 import * as YAML from "yaml"
-import {PlaceButton, TalkPlace, UserData} from "../UserData"
+import {MobPlace, PlaceButton, TalkPlace, UserData} from "../UserData"
 import {getRandomItem} from "../functions"
 import {send} from "../TG"
 import {Game} from "../Game"
 import {Zone} from "./Zone"
+import {MOB} from "../MOB"
 
 export class Talk {
     static all: {[saga: string]: {[id: string]: YAML_Talk}} = {}
@@ -70,7 +71,7 @@ export class Talk {
         return r
     }
 
-    static parseButtons(yaml: YAML_Talk_Button, saga: string): TalkPlace["line1"][0] {
+    static parseButtons(yaml: YAML_Talk_Button, saga: string): PlaceButton {
         let label: string
         if (typeof yaml.label === "string") {
             label = yaml.label
@@ -78,15 +79,39 @@ export class Talk {
             label = getRandomItem(yaml.label)
         }
 
-        let r: TalkPlace["line1"][0] = {
+        let r: PlaceButton = {
             label,
-            target: {
-                saga,
-                id: yaml.target
+            next: {
+                type: "click",
+                target: {
+                    saga,
+                    id: yaml.target
+                }
             },
             actions: []
         }
 
+        if (yaml.mob) {
+            r.next = {
+                type: "mob",
+                win_target: {
+                    saga,
+                    id: yaml.mob.win_target
+                }
+            }
+        }
+
+        if (yaml.timer) {
+            r.next = {
+                type: "timer",
+                target: {
+                    saga,
+                    id: yaml.timer.target
+                },
+                message: yaml.timer.message,
+                delay: yaml.timer.delay
+            }
+        }
         return r
     }
 
@@ -101,18 +126,62 @@ export class Talk {
             return false
         }
 
-        if (b.target.id === "exit") {
-            Zone.nextMain(u)
-        } else {
-            const new_place = Talk.getPlace(b.target.saga, b.target.id)
-            if (!new_place) {
-                let m = `ERROR: uid=${u.uid} Talk.getPlace empty for b =${JSON.stringify(b)}`
-                console.log(m)
-                await send(u, m)
+        if (b.next.type === "mob") {
+            const win_place = Talk.getPlace(b.next.win_target.saga, b.next.win_target.id)
+            if (!win_place) {
+                console.log(
+                    `ERROR: uid=${uid} trying to get win place Talk.getPlace b=${JSON.stringify(b)}`
+                )
+                return true
+            }
+            let mob_place: MobPlace = {
+                name: "mob",
+                mob: MOB.getMob(u.level),
+                round: 0,
+                boost: 0,
+                boost_count: 0,
+                win_place: win_place,
+                loose_place: {
+                    name: "zero"
+                }
+            }
+
+            u.place = mob_place
+        }
+
+        if (b.next.type === "click") {
+            if (b.next.target.id === "exit") {
+                Zone.nextMain(u)
+            } else {
+                const new_place = Talk.getPlace(b.next.target.saga, b.next.target.id)
+                if (!new_place) {
+                    let m = `ERROR: uid=${u.uid} Talk.getPlace empty for b =${JSON.stringify(b)}`
+                    console.log(m)
+                    await send(u, m)
+                    return true
+                }
+
+                u.place = new_place
+            }
+        }
+
+        if (b.next.type === "timer") {
+            const final_place = Talk.getPlace(b.next.target.saga, b.next.target.id)
+            if (!final_place) {
+                console.log(
+                    `ERROR: uid=${uid} trying to get final_place Talk.getPlace b=${JSON.stringify(b)}`
+                )
                 return true
             }
 
-            u.place = new_place
+            const idle = b.next.delay
+            u.place = {
+                name: "timer",
+                startedAt: Date.now(),
+                scheduledAt: Date.now() + idle * 1_000,
+                description: `⏳[${idle} сек.] ${b.next.message} ...`,
+                target_place: final_place
+            }
         }
 
         await Game.draw(u)
@@ -158,4 +227,6 @@ export type YAML_Talk = {
 export type YAML_Talk_Button = {
     label: string | string[]
     target: string
+    mob?: {win_target: string}
+    timer?: {delay: number; target: string; message: string}
 }
