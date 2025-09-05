@@ -1,10 +1,11 @@
 import {UserData} from "./UserData"
 import {Zero} from "./places/Zero"
 import {Intro} from "./places/Intro"
-import {TG} from "./TG"
+import {send} from "./TG"
 import {Zone} from "./places/Zone"
 import {MOB} from "./MOB"
 import {Talk} from "./places/Talk"
+import {User} from "./User"
 
 export class Game {
     static async draw(u: UserData) {
@@ -30,7 +31,7 @@ export class Game {
         }
 
         if (u.place.name === "timer") {
-            await TG.sr(u.uid, u.place.description)
+            await send(u.uid, u.place.description, [[User.ME]])
             return
         }
     }
