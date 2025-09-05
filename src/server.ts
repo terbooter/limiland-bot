@@ -28,6 +28,7 @@ async function main() {
     DB.connect()
     await Talk.load()
     await User.load()
+    await MOB.load()
     Rand.load()
 
     const expressApp = new ExpressApp()

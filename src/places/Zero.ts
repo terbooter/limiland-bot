@@ -28,8 +28,7 @@ export class Zero {
                 scheduledAt: Date.now() + idle * 1_000,
                 description: `⏳[${idle} сек.] Идем по спирали ...`,
                 target_place: {
-                    name: "zone",
-                    level: u.place.last_level
+                    name: "zone"
                 }
             }
 

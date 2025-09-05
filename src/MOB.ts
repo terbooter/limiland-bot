@@ -5,28 +5,48 @@ import {User} from "./User"
 import {getRandomItem} from "./functions"
 import {Game} from "./Game"
 import {Util} from "./Util"
+import * as fs from "fs/promises"
+import * as YAML from "yaml"
 
 export class MOB {
     static ATTACK = `Атака`
     static BLOCK = `Блок`
     static REGEN = `Отдых`
 
+    static list: YAML_Mob[]
+
     static getMob(level: number): Mob {
+        const armor = Math.floor(level * 0.1)
+        const attack = Math.floor(level * 0.5) + 1
+        const max_hp = Math.floor(level * 1.2) + 5
+        const max_ap = Math.floor(level * 0.2) + 3
+
         let mob: Mob = {
             pic: "🎃",
             name: "Тыква",
-            armor: 1,
-            attack: 2,
+            armor: armor,
+            attack: attack,
             credo: "",
-            hp: 10,
-            max_hp: 10,
-            ap: 5,
-            max_ap: 5,
+            hp: max_hp,
+            max_hp: max_hp,
+            ap: max_ap,
+            max_ap: max_ap,
             boost: 0,
             boost_count: 0
         }
 
+        let list_mob = getRandomItem(MOB.list)
+
+        mob.pic = list_mob.pic
+        mob.credo = list_mob.credo
+        mob.name = list_mob.name
+
         return mob
+    }
+
+    static async load() {
+        const file = await fs.readFile("./src/files/mobs.yaml", "utf8")
+        MOB.list = YAML.parse(file).list
     }
 
     static async exec(ctx: LContext): Promise<boolean> {
@@ -39,7 +59,7 @@ export class MOB {
         if (t == MOB.ATTACK || t === MOB.BLOCK || t === MOB.REGEN) {
             if (t == MOB.ATTACK || t === MOB.BLOCK) {
                 if (u.ap === 0) {
-                    await send(u, `Не хватает ОД`)
+                    await send(u, `Не хватает AP`)
                     return true
                 }
             }
@@ -272,10 +292,9 @@ export class MOB {
         let m = ``
         const mob = u.place.mob
         if (u.place.round === 0) {
-            m += `Нападение!\n`
-            m += `${mob.pic}${mob.name} ❤️${mob.hp}/${mob.max_hp} 🔋${mob.ap}/${mob.max_ap}\n`
-            m += `Атака: ${mob.attack}\n`
-            m += `Броня: ${mob.armor}\n`
+            m += `Нападение!\n\n`
+            m += `${mob.pic}<b>${mob.name}</b> <i>(${mob.credo})</i>\n`
+            m += `⚔️${mob.attack} 🛡️${mob.armor} ❤️${mob.hp}/${mob.max_hp} 🔋${mob.ap}/${mob.max_ap}\n`
         } else {
             m = `Бой с ${mob.pic}${mob.name} Раунд ${u.place.round}\n`
         }
@@ -341,4 +360,11 @@ export type BattleUnit = {
     armor: number
     attack: number
     move: "attack" | "block" | "regen"
+}
+
+export type YAML_Mob = {
+    pic: string
+    name: string
+    credo: string
+    strikes: string[]
 }
