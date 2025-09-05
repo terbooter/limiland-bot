@@ -1,0 +1,42 @@
+tree_talk:
+  0:
+    text: Ты видишь сухое дерево
+    line1:
+      - label: Подойти
+        target: 1
+      - label: Поджечь
+        target: 2
+
+  1:
+    text: Ты подошел к дереву
+    line1:
+      - label: Отойти
+        target: 0
+
+  2:
+    text: Ты поджег дерево
+    line1:
+      - label: Уйти отсюда
+        target: exit
+
+
+bird_talk:
+  0:
+    text: По небу летит большая птица
+    line1:
+      - label: Остановиться
+        target: 1
+
+  1:
+    text: Ты остановился и стал всматриваться
+    line1:
+      - label: Идти дальше
+        target: exit
+      - label: [ Приманить,Подманить ]
+        target: 2
+
+  2:
+    text: Ты стал махать рукой
+    line1:
+      - label: Идти дальше
+        target: exit

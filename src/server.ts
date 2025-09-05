@@ -12,6 +12,8 @@ import {Game} from "./Game"
 import {Zero} from "./places/Zero"
 import {Zone} from "./places/Zone"
 import {MOB} from "./MOB"
+import {Talk} from "./places/Talk"
+import {Rand} from "./Rand"
 
 require("dotenv").config()
 
@@ -24,7 +26,9 @@ const bot = new Telegraf<LContext>(process.env.BOT_TOKEN as string)
 async function main() {
     TG.init(bot)
     DB.connect()
+    await Talk.load()
     await User.load()
+    Rand.load()
 
     const expressApp = new ExpressApp()
 
@@ -146,6 +150,10 @@ bot.on(message("text"), async (ctx) => {
     }
 
     if (await MOB.exec(ctx)) {
+        return
+    }
+
+    if (await Talk.exec(ctx)) {
         return
     }
 })

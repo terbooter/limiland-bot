@@ -1,9 +1,10 @@
 import {UserData} from "./UserData"
 import {Zero} from "./places/Zero"
 import {Intro} from "./places/Intro"
-import {send, TG} from "./TG"
+import {TG} from "./TG"
 import {Zone} from "./places/Zone"
 import {MOB} from "./MOB"
+import {Talk} from "./places/Talk"
 
 export class Game {
     static async draw(u: UserData) {
@@ -21,6 +22,10 @@ export class Game {
         }
         if (u.place.name === "intro") {
             await Intro.draw(u)
+            return
+        }
+        if (u.place.name === "talk") {
+            await Talk.draw(u)
             return
         }
 

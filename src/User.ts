@@ -19,8 +19,10 @@ export class User {
 
     static createNew(from: TG_User): UserData {
         let u: UserData = {
-            rand: {main: 0},
+            rand: {main: 0, talk: 0},
             ap: 0,
+            level: 1,
+            max_level: 1,
             dexterity: 3,
             intellect: 3,
             vitality: 3,

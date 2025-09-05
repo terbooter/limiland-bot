@@ -4,6 +4,9 @@ export type UserData = {
     uid: number
     short_uid: string
 
+    level: number
+    max_level: number
+
     first_name: string
     last_name?: string
     username?: string
@@ -29,10 +32,11 @@ export type UserData = {
     chips: number
     losable_chips: number
     limi: number
-    place: IntroPlace | ZeroPlace | ZonePlace | TimerPlace | MobPlace
+    place: IntroPlace | ZeroPlace | ZonePlace | TimerPlace | MobPlace | TalkPlace
 
     rand: {
         main: number
+        talk: number
     }
 
     m?: string
@@ -47,12 +51,10 @@ export type IntroPlace = {
 
 export type ZeroPlace = {
     name: "zero"
-    last_level: number
 }
 
 export type ZonePlace = {
     name: "zone"
-    level: number
 }
 
 export type MobPlace = {
@@ -63,6 +65,24 @@ export type MobPlace = {
     attack_boost: number
     win_place: TimerPlace | ZonePlace
     loose_place: TimerPlace | ZeroPlace
+}
+
+export type TalkPlace = {
+    name: "talk"
+    img?: string
+    text: string
+    line1: PlaceButton[]
+    line2?: PlaceButton[]
+    line3?: PlaceButton[]
+}
+
+export type PlaceButton = {
+    label: string
+    actions: string[]
+    target: {
+        saga: string
+        id: string
+    }
 }
 
 export type TimerPlace = {
