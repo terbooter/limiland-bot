@@ -6,6 +6,7 @@ import {User} from "../User"
 import {MOB} from "../MOB"
 import {Talk} from "./Talk"
 import {Zero} from "./Zero"
+import {DB} from "../DB"
 
 export class Zone {
     static GO_FURTHER = "👣Исследовать"
@@ -68,6 +69,17 @@ export class Zone {
             return true
         }
         if (t === Zone.GO_FROM_CENTER) {
+            const level_kills = await DB.getCounter(uid, `kill_${u.level}`)
+            const required_kills = u.level * 10
+            if (level_kills < required_kills) {
+                let m = `Спираль не пускает тебя дальше!\n`
+                m += `Чтобы пройти на следующий круг тебе нужно ${required_kills} побед на текущем круге\n`
+                m += `Нужно еще ${required_kills - level_kills} побед`
+
+                await send(uid, m)
+                return true
+            }
+
             const idle = 2
             u.place = {
                 name: "timer",

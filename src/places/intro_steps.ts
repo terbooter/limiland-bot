@@ -34,7 +34,7 @@ export const intros = [
         text: `🦉Мой хороший,
 посмотрим на твои характеристики   
 <code>
-⚔️${Config.INTRO_STRENGTH} 🛡${Config.INTRO_ARMOR}  ❤️${Config.INTRO_MAX_HP}/${Config.INTRO_MAX_HP}  🔋${Config.INTRO_MAX_AP}/${Config.INTRO_MAX_AP}
+⚔️3 🛡0  ❤️15  🔋3
 </code>
 ⚔️ - атака
 🛡 - броня

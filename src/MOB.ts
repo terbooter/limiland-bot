@@ -7,6 +7,7 @@ import {Game} from "./Game"
 import {Util} from "./Util"
 import * as fs from "fs/promises"
 import * as YAML from "yaml"
+import {DB} from "./DB"
 
 export class MOB {
     static ATTACK = `Атака`
@@ -86,9 +87,13 @@ export class MOB {
             if (state === "win") {
                 u.place = u.place.win_place
                 await send(u, `🎉Ты победил!`)
+                await DB.updateCounter(uid, "kill")
+                await DB.updateCounter(uid, `kill_${u.level}`)
             } else if (state === "loose") {
                 u.place = u.place.loose_place
                 await send(u, `💀Ты проиграл...`)
+                await DB.updateCounter(uid, "loose")
+                await DB.updateCounter(uid, `loose_${u.level}`)
             }
 
             await Game.draw(u)
