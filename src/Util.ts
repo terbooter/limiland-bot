@@ -41,4 +41,30 @@ export class Util {
             }
         }
     }
+
+    static getProgressBar(value: number, maxValue: number) {
+        let percentage = Math.floor((value / maxValue) * 100)
+
+        const full = "■"
+        const empty = "□"
+        let numberOfFull = Math.floor(percentage / 10)
+        if (numberOfFull == 0 && value !== 0) {
+            numberOfFull = 1
+        }
+
+        let r = ""
+        for (let i = 0; i < 10; i++) {
+            if (i < numberOfFull) {
+                r += full
+            } else {
+                r += empty
+            }
+        }
+
+        if (percentage === 0 && value > 0) {
+            percentage = 1
+        }
+
+        return `${r} ${percentage}%`
+    }
 }

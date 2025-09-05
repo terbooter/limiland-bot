@@ -4,6 +4,7 @@ import {LContext} from "./server"
 import {User} from "./User"
 import {getRandomItem} from "./functions"
 import {Game} from "./Game"
+import {Util} from "./Util"
 
 export class MOB {
     static ATTACK = `Атака`
@@ -34,18 +35,30 @@ export class MOB {
             return false
         }
 
-        if (t == MOB.ATTACK || t === MOB.BLOCK) {
-            if (u.ap === 0) {
-                await send(u, `Не хватает ОД`)
+        if (t == MOB.ATTACK || t === MOB.BLOCK || t === MOB.REGEN) {
+            if (t == MOB.ATTACK || t === MOB.BLOCK) {
+                if (u.ap === 0) {
+                    await send(u, `Не хватает ОД`)
+                    return true
+                }
+            }
+
+            let {m, state} = MOB.execRound(u, t)
+
+            if (state === "battle") {
+                await Game.draw(u)
+                await send(u, m)
                 return true
             }
 
-            MOB.execRound(u, t)
-            await Game.draw(u)
-            return true
-        }
-        if (t == MOB.REGEN) {
-            MOB.execRound(u, t)
+            if (state === "win") {
+                u.place = u.place.win_place
+                await send(u, `🎉Ты победил!`)
+            } else if (state === "loose") {
+                u.place = u.place.loose_place
+                await send(u, `💀Ты проиграл...`)
+            }
+
             await Game.draw(u)
             return true
         }
@@ -53,9 +66,15 @@ export class MOB {
         return false
     }
 
-    static execRound(u: UserData, user_move: string) {
+    static execRound(
+        u: UserData,
+        user_move: string
+    ): {
+        m: string
+        state: "win" | "loose" | "battle"
+    } {
         if (u.place.name !== "mob") {
-            return `ERROR: can not exec round place=${u.place.name}`
+            return {m: `ERROR: can not exec round place=${u.place.name}`, state: "battle"}
         }
         const place = u.place
         const mob = place.mob
@@ -80,6 +99,7 @@ export class MOB {
             mob_total_attack += mob.attack_boost
             mob.attack_boost = 0
         } else if (mob_move === MOB.REGEN) {
+            mob.attack_boost = 0
             mob.ap++
             if (mob.ap >= mob.max_ap) {
                 mob.ap = mob.max_ap
@@ -107,23 +127,32 @@ export class MOB {
             }
         }
 
-        let m = `Раунд ${place.round}\n\n`
+        let user_message = ``
+        let mob_message = ``
+
+        let m = ``
         if (user_move === MOB.ATTACK) {
             let user_damage = user_total_attack - mob_total_armor
             if (user_damage < 0) {
                 user_damage = 0
             }
-            m += `👤Ты ударил 💥${user_damage}\n`
+
+            user_message = `👤Ты ударил 💥${user_damage}\n`
 
             mob.hp -= user_damage
             if (mob.hp < 0) {
                 mob.hp = 0
             }
         } else if (user_move === MOB.BLOCK) {
-            m += `👤Ты заблокировал ${user_total_armor}(${User.getArmor(u)}+${user_extra_armor})🛡️ `
-            m += `Буст атаки: +${place.attack_boost}⚡\n`
+            user_message = `👤Ты поставил блок ${user_total_armor}(${User.getArmor(u)}+${user_extra_armor})🛡️ `
+            user_message += `Буст атаки: +${place.attack_boost}⚡\n`
         } else if (user_move === MOB.REGEN) {
-            m += `👤Ты отдохнул +1🔋\n`
+            user_message = `👤Ты отдохнул +1🔋\n`
+        }
+
+        if (mob.hp === 0) {
+            m += ``
+            return {m, state: "win"}
         }
 
         m += ``
@@ -133,26 +162,36 @@ export class MOB {
             if (mob_damage < 0) {
                 mob_damage = 0
             }
-            m += `${mob.pic} Моб ударил 💥${mob_damage}\n`
+            mob_message = `${mob.pic} Моб ударил 💥${mob_damage}\n`
 
             u.hp -= mob_damage
             if (u.hp < 0) {
                 u.hp = 0
             }
         } else if (mob_move === MOB.BLOCK) {
-            m += `${mob.pic} Моб заблокировал ${mob_total_armor}(${mob.armor}+${mob_extra_armor})🛡 `
-            m += `Буст атаки: +${mob.attack_boost}⚡\n`
+            mob_message = `${mob.pic} Моб поставил блок ${mob_total_armor}(${mob.armor}+${mob_extra_armor})🛡 `
+            mob_message += `Буст атаки: +${mob.attack_boost}⚡\n`
         } else if (mob_move === MOB.REGEN) {
-            m += `${mob.pic} Моб отдохнул +1🔋\n`
+            mob_message = `${mob.pic} Моб отдохнул +1🔋\n`
         }
 
+        if (u.hp === 0) {
+            m += ``
+            return {m, state: "loose"}
+        }
+
+        m += user_message
+        m += mob_message
         m += `\n`
-
+        m += `${mob.pic} `
+        m += `⚔️${mob.attack + mob.attack_boost} 🛡${mob.armor} 🔋${mob.ap}/${mob.max_ap} ⚡${mob.attack_boost}\n`
+        m += `❤️${Util.getProgressBar(mob.hp, mob.max_hp)} ${mob.hp}/${mob.max_hp}\n`
+        m += `\n`
         m += `👤  ⚔️${User.getDamage(u) + u.place.attack_boost} 🛡${User.getArmor(u)}`
-        m += ` ❤️${u.hp}/${User.getMaxHP(u)}  🔋${u.ap}/${User.getMaxAP(u)} ⚡${place.attack_boost}\n`
-        m += `${mob.pic}  ⚔️${mob.attack + mob.attack_boost} 🛡${mob.armor} ❤️${mob.hp}/${mob.max_hp} 🔋${mob.ap}/${mob.max_ap} ⚡${mob.attack_boost}\n`
+        m += ` 🔋${u.ap}/${User.getMaxAP(u)} ⚡${place.attack_boost}\n`
+        m += `❤️${Util.getProgressBar(u.hp, User.getMaxHP(u))} ${u.hp}/${User.getMaxHP(u)}\n`
 
-        place.m = m
+        return {m, state: "battle"}
     }
 
     static async draw(u: UserData) {
@@ -169,7 +208,7 @@ export class MOB {
             m += `Атака: ${mob.attack}\n`
             m += `Броня: ${mob.armor}\n`
         } else {
-            m = u.place.m!
+            m = `Бой с ${mob.pic}${mob.name} Раунд ${u.place.round}\n`
         }
 
         await send(u.uid, m, [[MOB.BLOCK, MOB.ATTACK], [MOB.REGEN]])
