@@ -63,8 +63,7 @@ export class Intro {
 
         if (t === intros[intros.length - 1].button || t === Intro.SKIP) {
             u.place = {
-                name: "zero",
-                last_level: 1
+                name: "zero"
             }
 
             await send(u.uid, `Обучение завершено`)

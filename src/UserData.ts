@@ -62,7 +62,8 @@ export type MobPlace = {
     mob: Mob
     round: number
     m?: string
-    attack_boost: number
+    boost: number
+    boost_count: number
     win_place: TimerPlace | ZonePlace
     loose_place: TimerPlace | ZeroPlace
 }

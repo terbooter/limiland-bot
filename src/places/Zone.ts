@@ -52,7 +52,8 @@ export class Zone {
                 name: "mob",
                 mob: MOB.getMob(1),
                 round: 0,
-                attack_boost: 0,
+                boost: 0,
+                boost_count: 0,
                 win_place: {
                     name: "zone"
                 },

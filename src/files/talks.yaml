@@ -18,6 +18,9 @@ tree_talk:
     line1:
       - label: Уйти отсюда
         target: exit
+        reward:
+          - name: chips
+            value: 10
 
 
 bird_talk:
