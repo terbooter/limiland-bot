@@ -10,9 +10,13 @@ import * as YAML from "yaml"
 import {DB} from "./DB"
 
 export class MOB {
-    static ATTACK = `Атака`
-    static BLOCK = `Блок`
-    static REGEN = `Отдых`
+    static ATTACK = `🗡️Атака`
+    static BLOCK = `🔰Блок`
+    static REGEN = `❯❯ Пропуск`
+    static BATTLE_MENU = `Меню боя`
+    static ESCAPE_ASK = `Сбежать`
+    static ESCAPE_YES = `Да, драпаем`
+    static ESCAPE_NO = `Нет, продолжаем бой`
 
     static list: YAML_Mob[]
 
@@ -55,6 +59,31 @@ export class MOB {
 
         if (u.place.name !== "mob") {
             return false
+        }
+
+        if (t === MOB.BATTLE_MENU) {
+            await send(u, `Тактическое меню боя`, [[MOB.ESCAPE_ASK], [User.BACK_BUTTON]])
+            return true
+        }
+
+        if (t === MOB.ESCAPE_ASK) {
+            await send(u, `Ты действительно хочешь сбежать из боя?`, [
+                [MOB.ESCAPE_YES, MOB.ESCAPE_NO]
+            ])
+            return true
+        }
+
+        if (t === MOB.ESCAPE_YES) {
+            u.place = {
+                name: "zone"
+            }
+            await Game.draw(u)
+            return true
+        }
+
+        if (t === MOB.ESCAPE_NO) {
+            await Game.draw(u)
+            return true
         }
 
         if (t == MOB.ATTACK || t === MOB.BLOCK || t === MOB.REGEN) {
@@ -312,7 +341,7 @@ export class MOB {
             m = `Бой с ${mob.pic}${mob.name} Раунд ${u.place.round}\n`
         }
 
-        await send(u.uid, m, [[MOB.BLOCK, MOB.ATTACK], [MOB.REGEN]])
+        await send(u.uid, m, [[MOB.BLOCK, MOB.REGEN, MOB.ATTACK], [MOB.BATTLE_MENU]])
     }
 }
 
