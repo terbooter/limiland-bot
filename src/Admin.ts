@@ -1,9 +1,10 @@
 import {LContext} from "./server"
-import {s, TG} from "./TG"
+import {s, send, TG} from "./TG"
 import {DB} from "./DB"
 import {User} from "./User"
 import {Config} from "./Config"
 import {Util} from "./Util"
+import {Items} from "./Items"
 
 export class Admin {
     static async exec(ctx: LContext): Promise<boolean> {
@@ -94,6 +95,26 @@ export class Admin {
         if (t === "/zero") {
             // await Zero.placeToRoot(ctx.u)
             u.m = `In debug`
+            return true
+        }
+
+        if (t.startsWith("/add_")) {
+            const item_id = parseInt(t.split("_")[1])
+
+            const item = Items.all[item_id]
+            if (!item) {
+                await send(u, `Нет предмета с item_id=${item_id}`)
+                return true
+            }
+
+            let qty = parseInt(t.split("_")[2])
+
+            if (!qty) {
+                qty = 1
+            }
+
+            User.addItem(u, item_id, qty)
+            await TG.s(uid, `Добавлено: +${qty} ${Items.all[item_id].name}`)
             return true
         }
 

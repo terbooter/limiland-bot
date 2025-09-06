@@ -159,6 +159,10 @@ bot.on(message("text"), async (ctx) => {
     if (await Talk.exec(ctx)) {
         return
     }
+
+    if (await Items.exec(ctx)) {
+        return
+    }
 })
 
 bot.on("callback_query", async (ctx) => {

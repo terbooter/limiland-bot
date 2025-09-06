@@ -6,6 +6,7 @@ import {DB} from "./DB"
 import {r100} from "./functions"
 import {Rand} from "./Rand"
 import {Items} from "./Items"
+import {DEXTERITY, INTELLECT, STRENGTH, VITALITY} from "./Constants"
 
 export class User {
     static all: {[uid: number]: UserData} = {}
@@ -81,12 +82,12 @@ export class User {
 
         if (t === "/me" || t === User.ME) {
             const {vitality, strength, dexterity, intellect} = u
-            let m = `${User.getName(u)}\n`
-            m += `${User.getStatusBar(u)}\n`
-            m += `Здоровье: ${vitality}\n`
-            m += `Сила: ${strength}\n`
-            m += `Ловкость: ${dexterity}\n`
-            m += `Ум: ${intellect}\n`
+            let m = `👤 <b>${User.getName(u)}\n\n</b>`
+            m += `${User.getStatusBar(u)}\n\n`
+            m += `${VITALITY}: ${vitality}\n`
+            m += `${STRENGTH}: ${strength}\n`
+            m += `${DEXTERITY}: ${dexterity}\n`
+            m += `${INTELLECT}: ${intellect}\n`
 
             await send(u, m, [[User.BAG], [User.BACK_BUTTON]])
             return true
@@ -97,7 +98,9 @@ export class User {
 
             for (const id in u.items) {
                 const item = Items.all[id]
-                m += `▫️${item.pic}${item.name}(x${u.items[id]})\n`
+                let commandStr = ``
+
+                m += `▫️${item.pic}${item.name}(x${u.items[id]})  /item_${item.id}\n`
             }
 
             await send(u, m, [[User.BACK_BUTTON]])
