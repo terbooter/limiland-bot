@@ -43,7 +43,7 @@ export class Talk {
             b.push(place.line3.map((x) => x.label))
         }
 
-        await send(u.uid, m, b)
+        await send(u.uid, m, b, place.img)
     }
 
     static getPlace(saga: string, id: string): TalkPlace | null {
@@ -58,6 +58,10 @@ export class Talk {
             name: "talk",
             text: data.text,
             line1: data.line1.map((x) => Talk.parseButtons(x, saga))
+        }
+
+        if (data.img) {
+            r.img = data.img
         }
 
         if (data.line2) {
@@ -219,6 +223,7 @@ export class Talk {
 export type YAML_Talk = {
     id: string
     text: string
+    img?: string
     line1: YAML_Talk_Button[]
     line2?: YAML_Talk_Button[]
     line3?: YAML_Talk_Button[]

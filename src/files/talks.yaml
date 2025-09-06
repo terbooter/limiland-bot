@@ -1,6 +1,7 @@
 tree_talk:
   0:
     text: Ты видишь сухое дерево
+    img: talk/tree_talk_1.jpg
     line1:
       - label: Подойти
         target: 1

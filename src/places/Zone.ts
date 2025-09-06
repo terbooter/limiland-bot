@@ -70,7 +70,8 @@ export class Zone {
         }
         if (t === Zone.GO_FROM_CENTER) {
             const level_kills = await DB.getCounter(uid, `kill_${u.level}`)
-            const required_kills = u.level * 10
+            // const required_kills = u.level * 10
+            const required_kills = u.level * 1
             if (level_kills < required_kills) {
                 let m = `Спираль не пускает тебя дальше!\n`
                 m += `Чтобы пройти на следующий круг тебе нужно ${required_kills} побед на текущем круге\n`
@@ -99,7 +100,7 @@ export class Zone {
                     {item_id: 2, count: 3}
                 ])
 
-                await send(uid, m)
+                await send(uid, m, undefined, "main/new_circle_1.jpeg")
             }
 
             await Game.draw(u)
@@ -139,7 +140,8 @@ export class Zone {
         }
 
         // let saga = User.nextRand("talk", u)
-        // saga = "timer_test"
+        // let saga = "timer_test"
+        // let saga = "tree_talk"
         // target_place = Talk.getPlace(saga, "0")
 
         const idle = 2
