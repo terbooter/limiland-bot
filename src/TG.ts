@@ -1,18 +1,22 @@
-import {Telegraf} from "telegraf"
+import {Input, Telegraf} from "telegraf"
 import {LContext} from "./server"
 import {DB} from "./DB"
 import {logDate} from "./functions"
 import {Util} from "./Util"
 import {UserData} from "./UserData"
+import {access} from "fs/promises"
+import {constants} from "node:fs"
 
 export async function s(uid: number, text: string, keyboard?: any): Promise<number> {
     return await TG.s(uid, text, keyboard)
 }
 
+// file format sample "npc/jester_1.jpg"
 export async function send(
     uid: number | UserData,
     text: string,
-    buttons?: string[][]
+    buttons: string[][] | undefined = undefined,
+    file?: string
 ): Promise<number> {
     let real_uid
     if (Number.isInteger(uid)) {
@@ -21,7 +25,13 @@ export async function send(
         real_uid = (uid as unknown as UserData).uid
     }
 
-    return await TG.send(real_uid, text, buttons)
+    if (file) {
+        await sendPhoto(real_uid, text, file, buttons)
+    } else {
+        return await TG.send(real_uid, text, buttons)
+    }
+
+    return 0
 }
 
 export class TG {
@@ -144,6 +154,58 @@ export class TG {
             },
             parse_mode: "HTML"
         })
+    }
+}
+
+export async function sendPhoto(
+    uid: number,
+    message: string,
+    file: string = "npc/jester_1.jpg",
+    buttons?: string[][]
+) {
+    let path = `./src/files/img/`
+
+    try {
+        let a = await access(path + file, constants.F_OK)
+    } catch (err) {
+        //file not exists
+        file = `no_file.jpg`
+    }
+
+    let sql = `SELECT * FROM img WHERE file_name=$1`
+    let {rows} = await DB.query(sql, [file])
+    let row = rows[0]
+
+    const extra: {caption: string; parse_mode: string; reply_markup?: any} = {
+        caption: message,
+        parse_mode: "HTML"
+        // reply_markup: Util.getKeyboard(buttons).reply_markup
+    }
+
+    if (buttons) {
+        extra.reply_markup = Util.getKeyboard(buttons).reply_markup
+    }
+
+    if (row) {
+        let file_id = row.file_id
+        // @ts-ignore
+        let r = await TG.bot.telegram.sendPhoto(uid, file_id, extra)
+    } else {
+        const inp = Input.fromLocalFile(path + file)
+        // @ts-ignore
+        let r = await TG.bot.telegram.sendPhoto(uid, inp, extra)
+
+        if (r.photo && r.photo[0] && r.photo[0].file_id) {
+            const file_id = r.photo[0].file_id
+
+            sql = `INSERT INTO img (file_name, file_id, data)
+                            VALUES ($1, $2, $3)`
+
+            await DB.query(sql, [file, file_id, JSON.stringify(r)])
+        } else {
+            console.log(`ERROR: uid=${uid} can not load file ${path + file}`)
+            console.log(JSON.stringify(r))
+        }
     }
 }
 

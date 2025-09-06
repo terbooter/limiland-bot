@@ -47,6 +47,6 @@ export class Zero {
 
         let m = `🌐Зероград\n`
         m += `Центр Великой Спирали`
-        await send(u.uid, m, [[Zero.TO_ZONE], [User.ME]])
+        await send(u.uid, m, [[Zero.TO_ZONE], [User.ME]], "main/zero_1.jpeg")
     }
 }
