@@ -144,12 +144,18 @@ export class Zone {
         // let saga = "tree_talk"
         // target_place = Talk.getPlace(saga, "0")
 
+        let restore_m = ``
+        if (u.hp < User.getMaxHP(u) || u.ap < User.getMaxAP(u)) {
+            restore_m = `HP и AP восстанавливаются ...`
+        }
+        User.restoreBars(u)
+
         const idle = 2
         u.place = {
             name: "timer",
             startedAt: Date.now(),
             scheduledAt: Date.now() + idle * 1_000,
-            description: `⏳[${idle} сек.] Исследуешь круг ...`,
+            description: `⏳[${idle} сек.] Исследуешь круг ... ${restore_m}`,
             target_place: target_place
         }
     }
@@ -159,8 +165,6 @@ export class Zone {
             console.log(`ERROR: uid=${u.uid} try zone draw but place = ${JSON.stringify(u.place)}`)
             return
         }
-
-        User.restoreBars(u)
 
         let m = `🌀 ${u.level} Круг | Спираль\n`
         m += User.getStatusBar(u)

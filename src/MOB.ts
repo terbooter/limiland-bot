@@ -60,7 +60,7 @@ export class MOB {
         if (t == MOB.ATTACK || t === MOB.BLOCK || t === MOB.REGEN) {
             if (t == MOB.ATTACK || t === MOB.BLOCK) {
                 if (u.ap === 0) {
-                    await send(u, `Не хватает AP`)
+                    await send(u, `🪫Не хватает AP`)
                     return true
                 }
             }
@@ -260,15 +260,23 @@ export class MOB {
             mob_message += `${mob.pic} ${mob.name} отдохнул +1🔋 ${mob.ap}/${mob.max_ap}\n`
         }
 
+        let ap_icon = `🔋`
+        if (u.ap === 0) {
+            ap_icon = `🪫`
+        }
         mob_message += `\n`
         mob_message += `<b>❤️Ты</b>: ${u.hp}/${getMaxHP(u)}\n`
         mob_message += `${bar(u.hp, getMaxHP(u))}\n`
-        mob_message += `🔋${u.ap}/${getMaxAP(u)}\n`
+        mob_message += `${ap_icon}${u.ap}/${getMaxAP(u)}\n`
         mob_message += `\n`
 
+        ap_icon = `🔋`
+        if (mob.ap === 0) {
+            ap_icon = `🪫`
+        }
         mob_message += `🖤${mob.name}:  ${mob.hp}/${mob.max_hp}\n`
         mob_message += `${bar(mob.hp, mob.max_hp)}\n`
-        mob_message += `🔋${mob.ap}/${mob.max_ap}\n`
+        mob_message += `${ap_icon}${mob.ap}/${mob.max_ap}\n`
 
         if (u.hp === 0) {
             return {first: user_message, second: mob_message, state: "loose"}
