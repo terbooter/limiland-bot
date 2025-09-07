@@ -20,7 +20,7 @@ export class MOB {
 
     static list: YAML_Mob[]
 
-    static getMob(level: number): Mob {
+    static getMob(level: number, type: 1 | 2 | 3 | 4 | 5 = 1): Mob {
         const armor = Math.floor(level * 0.1)
         const attack = Math.floor(level * 0.5) + 1
         const max_hp = Math.floor(level * 1.2) + 5
@@ -37,7 +37,9 @@ export class MOB {
             ap: max_ap,
             max_ap: max_ap,
             boost: 0,
-            boost_count: 0
+            boost_count: 0,
+            chips: level,
+            limi: 1
         }
 
         let list_mob = getRandomItem(MOB.list)
@@ -114,8 +116,19 @@ export class MOB {
             }
 
             if (state === "win") {
+                let {chips, limi} = u.place.mob
+
+                if (u.level_explore > u.level * 100) {
+                    limi = 0
+                }
+
                 u.place = u.place.win_place
                 await send(u, `🎉Ты победил!`)
+                let m = User.giveReward(u, [
+                    {item_id: 1, count: chips},
+                    {item_id: 2, count: limi}
+                ])
+                await send(uid, m)
                 await DB.updateCounter(uid, "kill")
                 await DB.updateCounter(uid, `kill_${u.level}`)
             } else if (state === "loose") {
@@ -357,6 +370,8 @@ export type Mob = {
     max_hp: number
     ap: number
     max_ap: number
+    chips: number
+    limi: number
 }
 
 export type BattleMove = {

@@ -7,6 +7,7 @@ import {send} from "../TG"
 import {Game} from "../Game"
 import {Zone} from "./Zone"
 import {MOB} from "../MOB"
+import {DB} from "../DB"
 
 export class Talk {
     static all: {[saga: string]: {[id: string]: YAML_Talk}} = {}
@@ -156,6 +157,7 @@ export class Talk {
         if (b.next.type === "click") {
             if (b.next.target.id === "exit") {
                 Zone.nextMain(u)
+                await DB.updateCounter(uid, `explore_${u.level}`)
             } else {
                 const new_place = Talk.getPlace(b.next.target.saga, b.next.target.id)
                 if (!new_place) {

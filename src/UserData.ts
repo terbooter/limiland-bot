@@ -5,6 +5,7 @@ export type UserData = {
     short_uid: string
 
     level: number
+    level_explore: number
     max_level: number
 
     first_name: string

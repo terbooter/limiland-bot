@@ -23,6 +23,7 @@ export class User {
             rand: {main: 0, talk: 0},
             ap: 0,
             level: 1,
+            level_explore: 0,
             max_level: 1,
             dexterity: 3,
             intellect: 3,
@@ -199,6 +200,10 @@ export class User {
     static giveReward(u: UserData, items: {item_id: number; count: number}[]): string {
         let arr: string[] = []
         for (const e of items) {
+            if (e.count === 0) {
+                continue
+            }
+
             const item = Items.all[e.item_id]
             arr.push(`<b>+${e.count}${item.pic}${item.name}</b>`)
             User.addItem(u, e.item_id, e.count)

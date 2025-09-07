@@ -25,6 +25,7 @@ export class Zone {
             Zone.nextMain(u)
 
             await Game.draw(u)
+            await DB.updateCounter(uid, `explore_${u.level}`)
             return true
         }
 
@@ -64,14 +65,15 @@ export class Zone {
                 }
             }
             u.level--
+            u.level_explore = await DB.getCounter(uid, `explore_${u.level}`)
 
             await Game.draw(u)
             return true
         }
         if (t === Zone.GO_FROM_CENTER) {
             const level_kills = await DB.getCounter(uid, `kill_${u.level}`)
-            // const required_kills = u.level * 10
-            const required_kills = u.level * 1
+            const required_kills = u.level * 10
+            // const required_kills = u.level * 1
             if (level_kills < required_kills) {
                 let m = `Спираль не пускает тебя дальше!\n`
                 m += `Чтобы пройти на следующий круг тебе нужно ${required_kills} побед на текущем круге\n`
@@ -92,6 +94,7 @@ export class Zone {
                 }
             }
             u.level++
+            u.level_explore = await DB.getCounter(uid, `explore_${u.level}`)
             if (u.level > u.max_level) {
                 u.max_level = u.level
                 let m = `🌀Ты открыл путь на новый круг Спирали\n\n`
@@ -138,6 +141,7 @@ export class Zone {
                 name: "zone"
             }
         }
+        u.level_explore++
 
         // let saga = User.nextRand("talk", u)
         // let saga = "timer_test"
