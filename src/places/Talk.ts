@@ -18,7 +18,7 @@ export class Talk {
 
         Talk.all = obj
 
-        console.dir(obj, {depth: null})
+        // console.dir(obj, {depth: null})
     }
 
     static async draw(u: UserData) {

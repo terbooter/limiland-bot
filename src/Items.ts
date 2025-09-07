@@ -17,7 +17,7 @@ export class Items {
             Items.all[item.id] = item
         }
 
-        console.log(Items.all)
+        // console.log(Items.all)
     }
 
     static async exec(ctx: LContext): Promise<boolean> {
