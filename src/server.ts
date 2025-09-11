@@ -15,6 +15,7 @@ import {MOB} from "./MOB"
 import {Talk} from "./places/Talk"
 import {Rand} from "./Rand"
 import {Items} from "./Items"
+import {ItemColor, Outfit} from "./Outfit"
 
 require("dotenv").config()
 
@@ -23,6 +24,15 @@ const requests: {[uid: number]: number} = {}
 console.log("START SERVER")
 
 const bot = new Telegraf<LContext>(process.env.BOT_TOKEN as string)
+
+console.log(Object.values(ItemColor))
+console.log(Outfit.helmets.length)
+console.log(Outfit.weapons.length)
+console.log(Outfit.suits.length)
+
+for (let i = 0; i < 100; i++) {
+    console.log(i, Outfit.getWeaponRank(i), Outfit.getSuitRank(i), Outfit.getHelmetRank(i))
+}
 
 async function main() {
     TG.init(bot)
