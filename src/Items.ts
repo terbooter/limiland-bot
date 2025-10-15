@@ -13,11 +13,12 @@ export class Items {
         const file = await fs.readFile("./src/files/items.yaml", "utf8")
         const obj = YAML.parse(file)
 
-        for (const item of obj) {
-            Items.all[item.id] = item
+        Items.all = obj
+        for (const id in Items.all) {
+            Items.all[id].id = parseInt(id)
         }
 
-        // console.log(Items.all)
+        console.log(Items.all)
     }
 
     static async exec(ctx: LContext): Promise<boolean> {
@@ -140,4 +141,8 @@ export type YAML_Item = {
     name: string
     info?: string
     usable?: true
+    equip?: true
+    type: "helmet" | "weapon" | "suit"
+    attack?: number
+    armor?: number
 }

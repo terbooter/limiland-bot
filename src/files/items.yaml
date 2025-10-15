@@ -1,19 +1,1180 @@
-- pic: 🧩
-  id: 1
+1:
+  pic: 🧩
   name: Чип
 
-- pic: 💎
-  id: 2
+
+2:
+  pic: 💎
   name: Лими
   info: Используй для генерации предметов в Генераторе
 
-- pic: 🪩
-  id: 3
+3:
+  pic: 🪩
   name: Ядро
   usable: true
   info: Используй чтобы увеличить любую характеристику
 
-- pic: 🔑
-  id: 780
-  name: Ключик
-  activation: false
+4:
+  pic: 🗡️
+  name: Зубочистка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+5:
+  pic: 🗡️
+  name: Карандаш
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+6:
+  pic: 🗡️
+  name: Черный фломастер
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+7:
+  pic: 🗡️
+  name: Зубная щетка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+8:
+  pic: 🗡️
+  name: Швейная игла
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+9:
+  pic: 🗡️
+  name: Пилка для ногтей
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+10:
+  pic: 🗡️
+  name: Обломок кости
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+11:
+  pic: 🗡️
+  name: Гнутая вилка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+12:
+  pic: 🗡️
+  name: Веточка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+13:
+  pic: 🗡️
+  name: Свёрнутая газета
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+14:
+  pic: 🗡️
+  name: Маникюрные ножницы
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+15:
+  pic: 🗡️
+  name: Алюминиевая вилка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+16:
+  pic: 🗡️
+  name: Металлическая линейка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+17:
+  pic: 🗡️
+  name: Стальная вилка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+18:
+  pic: 🗡️
+  name: Мухобойка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+19:
+  pic: 🗡️
+  name: Стальная ложка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+20:
+  pic: 🗡️
+  name: Березовый веник
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+21:
+  pic: 🗡️
+  name: Вантуз
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+22:
+  pic: 🗡️
+  name: Ржавый гвоздь
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+23:
+  pic: 🗡️
+  name: Медный гвоздь
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+24:
+  pic: 🗡️
+  name: Большая поварёшка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+25:
+  pic: 🗡️
+  name: Шампур без ручки
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+26:
+  pic: 🗡️
+  name: Латунный подсвечник
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+27:
+  pic: 🗡️
+  name: Металлический черпак
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+28:
+  pic: 🗡️
+  name: Битая бутылка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+29:
+  pic: 🗡️
+  name: Пассатижи
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+30:
+  pic: 🗡️
+  name: Консервный нож
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+31:
+  pic: 🗡️
+  name: Раскладной зонт
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+32:
+  pic: 🗡️
+  name: Хирургический скальпель
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+33:
+  pic: 🗡️
+  name: Деревянная скалка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+34:
+  pic: 🗡️
+  name: Изогнутый напильник
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+35:
+  pic: 🗡️
+  name: Плоская отвёртка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+36:
+  pic: 🗡️
+  name: Штопор с ручкой
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+37:
+  pic: 🗡️
+  name: Крестовая отвёртка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+38:
+  pic: 🗡️
+  name: Гриф от гитары
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+39:
+  pic: 🗡️
+  name: Доска с гвоздями
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+40:
+  pic: 🗡️
+  name: Железная сковорода
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+41:
+  pic: 🗡️
+  name: Металлическая вешалка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+42:
+  pic: 🗡️
+  name: Антенна для ТВ
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+43:
+  pic: 🗡️
+  name: Перочинный ножик
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+44:
+  pic: 🗡️
+  name: Маленький утюг
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+45:
+  pic: 🗡️
+  name: Резиновый молоток
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+46:
+  pic: 🗡️
+  name: Лыжная палка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+47:
+  pic: 🗡️
+  name: Гантель 5 кг
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+48:
+  pic: 🗡️
+  name: Гаечный ключ на 17
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+49:
+  pic: 🗡️
+  name: Большой утюг
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+50:
+  pic: 🗡️
+  name: Топорик туристический
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+51:
+  pic: 🗡️
+  name: Черенок от лопаты
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+52:
+  pic: 🗡️
+  name: Столярный молоток
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+53:
+  pic: 🗡️
+  name: Гвоздодёр
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+54:
+  pic: 🗡️
+  name: Деревянная лопата
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+55:
+  pic: 🗡️
+  name: Деревянная швабра
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+56:
+  pic: 🗡️
+  name: Лодочное весло
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+57:
+  pic: 🗡️
+  name: Велосипедная цепь
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+58:
+  pic: 🗡️
+  name: Тупой топор
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+59:
+  pic: 🗡️
+  name: Кусок арматуры
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+60:
+  pic: 🗡️
+  name: Резиновая дубинка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+61:
+  pic: 🗡️
+  name: Кочерга
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+62:
+  pic: 🗡️
+  name: Стальной прут
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+63:
+  pic: 🗡️
+  name: Старая кирка
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+64:
+  pic: 🗡️
+  name: Пожарный багор
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+65:
+  pic: 🗡️
+  name: Бейсбольная бита
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+66:
+  pic: 🗡️
+  name: Гантель 10 кг
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+67:
+  pic: 🗡️
+  name: Большой мясницкий нож
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+68:
+  pic: 🗡️
+  name: Шипованная бейсбольная бита
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+69:
+  pic: 🗡️
+  name: Стальная кувалда
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+70:
+  pic: 🗡️
+  name: Кусок рельсы
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+71:
+  pic: 🗡️
+  name: Зазубренная сабля
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+72:
+  pic: 🗡️
+  name: Шпага дуэлянта
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+73:
+  pic: 🗡️
+  name: Старый меч
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+74:
+  pic: 🗡️
+  name: Гномья булава
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+75:
+  pic: 🗡️
+  name: Острый вакидзаси
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+76:
+  pic: 🗡️
+  name: Длинная катана
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+77:
+  pic: 🗡️
+  name: Эльфийская глефа
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+78:
+  pic: 🗡️
+  name: Красный меч
+  min_level: 1
+  attack: 1
+  equip: true
+  type: weapon
+
+79:
+  pic: 🧢
+  name: Заколка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+80:
+  pic: 🧢
+  name: Розовый бантик
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+81:
+  pic: 🧢
+  name: Венок из одуванчиков
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+82:
+  pic: 🧢
+  name: Бейсболка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+83:
+  pic: 🧢
+  name: Панама
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+84:
+  pic: 🧢
+  name: Косынка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+85:
+  pic: 🧢
+  name: Платок в горошек
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+86:
+  pic: 🧢
+  name: Ночной чепчик
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+87:
+  pic: 🧢
+  name: Кепка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+88:
+  pic: 🧢
+  name: Картонная коробка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+89:
+  pic: 🧢
+  name: Стильный берет
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+90:
+  pic: 🧢
+  name: Вязаная шапочка с помпоном
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+91:
+  pic: 🧢
+  name: Резиновая шапочка для плавания
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+92:
+  pic: 🧢
+  name: Поварской колпак
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+93:
+  pic: 🧢
+  name: Фуражка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+94:
+  pic: 🧢
+  name: Половинка мяча
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+95:
+  pic: 🧢
+  name: Мексиканский сомбреро
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+96:
+  pic: 🧢
+  name: Рыжий парик
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+97:
+  pic: 🧢
+  name: Соломенная шляпа
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+98:
+  pic: 🧢
+  name: Бандана с черепом
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+99:
+  pic: 🧢
+  name: Шапочка Санта-Клауса
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+100:
+  pic: 🧢
+  name: Фетровая шляпа
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+101:
+  pic: 🧢
+  name: Пиратская треуголка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+102:
+  pic: 🧢
+  name: Банный войлочный колпак
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+103:
+  pic: 🧢
+  name: Маска сварщика
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+104:
+  pic: 🧢
+  name: Меховая ушанка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+105:
+  pic: 🧢
+  name: Плетёная корзина
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+106:
+  pic: 🧢
+  name: Шапочка из фольги
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+107:
+  pic: 🧢
+  name: Дуршлаг
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+108:
+  pic: 🧢
+  name: Стальная миска
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+109:
+  pic: 🧢
+  name: Деревянная каска
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+110:
+  pic: 🧢
+  name: Пластиковое ведро
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+111:
+  pic: 🧢
+  name: Алюминиевая кастрюля
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+112:
+  pic: 🧢
+  name: Велосипедный шлем
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+113:
+  pic: 🧢
+  name: Цветочный горшок
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+114:
+  pic: 🧢
+  name: Медный тазик
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+115:
+  pic: 🧢
+  name: Строительная каска
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+116:
+  pic: 🧢
+  name: Железное ведро
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+117:
+  pic: 🧢
+  name: Шахтерская каска
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+118:
+  pic: 🧢
+  name: Пробковый шлем
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+119:
+  pic: 🧢
+  name: Деревянный шлем с забралом
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+120:
+  pic: 🧢
+  name: Мотоциклетный шлем
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+121:
+  pic: 🧢
+  name: Кожаный колпак гнома
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+122:
+  pic: 🧢
+  name: Шлем викинга с рогами
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+123:
+  pic: 🧢
+  name: Шлем гладиатора
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+124:
+  pic: 🧢
+  name: Железный шлем рыцаря
+  min_level: 1
+  armor: 1
+  equip: true
+  type: helmet
+
+125:
+  pic: 🧥
+  name: Майка алкоголичка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+126:
+  pic: 🧥
+  name: Дырявая футболка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+127:
+  pic: 🧥
+  name: Футболка с пятнами
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+128:
+  pic: 🧥
+  name: Гавайская рубашка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+129:
+  pic: 🧥
+  name: Футболка с надписями
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+130:
+  pic: 🧥
+  name: Ночная сорочка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+131:
+  pic: 🧥
+  name: Льняная рубашка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+132:
+  pic: 🧥
+  name: облезлый жилет
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+133:
+  pic: 🧥
+  name: Старое пальто
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+134:
+  pic: 🧥
+  name: Полосатая кофта
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+135:
+  pic: 🧥
+  name: Шёлковый халат
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+136:
+  pic: 🧥
+  name: Свитер с оленями
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+137:
+  pic: 🧥
+  name: Фартук повара
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+138:
+  pic: 🧥
+  name: Футболка-поло
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+139:
+  pic: 🧥
+  name: Джинсовый жакет
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+140:
+  pic: 🧥
+  name: Спортивная толстовка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+141:
+  pic: 🧥
+  name: Банный халат
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+142:
+  pic: 🧥
+  name: Ветровка туристическая
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+143:
+  pic: 🧥
+  name: Рубашка ковбоя клетчатая
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+144:
+  pic: 🧥
+  name: Толстовка оверсайз
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+145:
+  pic: 🧥
+  name: Халат махровый домашний
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+146:
+  pic: 🧥
+  name: Куртка байкерская кожанка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+147:
+  pic: 🧥
+  name: Медицинский халат
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+148:
+  pic: 🧥
+  name: Дождевик резиновый
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+149:
+  pic: 🧥
+  name: Фланелевая рубашка лесоруба
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+150:
+  pic: 🧥
+  name: Телогрейка рабочая
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+151:
+  pic: 🧥
+  name: Элегантный фрак
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+152:
+  pic: 🧥
+  name: Кожаная кираса
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+153:
+  pic: 🧥
+  name: Усиленная стеганка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+154:
+  pic: 🧥
+  name: Кожаная рубаха
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+155:
+  pic: 🧥
+  name: Плотная стеганка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+156:
+  pic: 🧥
+  name: Малиновый пиджак
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+157:
+  pic: 🧥
+  name: Заплатанная куртка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+158:
+  pic: 🧥
+  name: Фуфайка
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+159:
+  pic: 🧥
+  name: Зелёный кафтан
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+160:
+  pic: 🧥
+  name: Норковая шуба
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+161:
+  pic: 🧥
+  name: Кожаный плащ
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+162:
+  pic: 🧥
+  name: Тонкая кольчуга
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+163:
+  pic: 🧥
+  name: Деревянная кираса
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+164:
+  pic: 🧥
+  name: Медная кираса
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+165:
+  pic: 🧥
+  name: Железная кираса
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+166:
+  pic: 🧥
+  name: Стальная кираса
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+167:
+  pic: 🧥
+  name: Ржавая кольчуга
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+168:
+  pic: 🧥
+  name: Медная кольчуга
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
+169:
+  pic: 🧥
+  name: Стальная кольчуга
+  min_level: 1
+  armor: 1
+  equip: true
+  type: suit
