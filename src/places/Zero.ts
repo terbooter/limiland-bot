@@ -6,6 +6,7 @@ import {User} from "../User"
 
 export class Zero {
     static TO_ZONE = "🚧В Путь"
+    static LIMIRATOR = "💎Лимиратор"
     static MEDIC = "🏥Медик"
     static ENGINEER = "🛠️Инженер"
     static JOB = "♻ Работа"
@@ -18,6 +19,11 @@ export class Zero {
         const {uid, u, t} = ctx
         if (u.place.name !== "zero") {
             return false
+        }
+
+        if (t === Zero.ZERO) {
+            await Game.draw(u)
+            return true
         }
 
         if (t === Zero.TO_ZONE) {
@@ -47,6 +53,6 @@ export class Zero {
 
         let m = `🌐Зероград\n`
         m += `Центр Великой Спирали`
-        await send(u.uid, m, [[Zero.TO_ZONE], [User.ME]], "main/zero_1.jpeg")
+        await send(u.uid, m, [[Zero.TO_ZONE], [Zero.LIMIRATOR], [User.ME]], "main/zero_1.jpeg")
     }
 }

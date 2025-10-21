@@ -37,9 +37,7 @@ export class User {
             username: from.username,
             hp: 0,
 
-            chips: 0,
             losable_chips: 0,
-            limi: 0,
             place: {
                 name: "intro",
                 step: 0
@@ -195,6 +193,32 @@ export class User {
         }
 
         return u.items[id]
+    }
+
+    static checkItemsCount(u: UserData, arr: {item_id: number; count: number}[]): string | null {
+        let required: {item_id: number; count: number; need_count: number}[] = []
+        for (const {item_id, count} of arr) {
+            let user_count = User.getItemsCount(u, item_id)
+            if (user_count < count) {
+                required.push({item_id, count, need_count: count - user_count})
+            }
+        }
+        if (required.length === 0) {
+            return null
+        }
+
+        if (required.length === 1) {
+            let item = Items.all[required[0].item_id]
+            return `Не хватает ${item.pic} ${item.name}, нужно еще ${required[0].need_count}`
+        }
+
+        let m = `Не хватает: `
+        let strings = required.map((x) => {
+            let item = Items.all[x.item_id]
+            return `${item.pic}${item.name}`
+        })
+        m += strings.join(", ")
+        return m
     }
 
     static giveReward(u: UserData, items: {item_id: number; count: number}[]): string {

@@ -30,9 +30,7 @@ export type UserData = {
     legs?: any
     feet?: any
 
-    chips: number
     losable_chips: number
-    limi: number
     place: IntroPlace | ZeroPlace | ZonePlace | TimerPlace | MobPlace | TalkPlace
 
     rand: {

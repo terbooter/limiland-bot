@@ -16,6 +16,7 @@ import {Talk} from "./places/Talk"
 import {Rand} from "./Rand"
 import {Items} from "./Items"
 import {ItemColor, Outfit} from "./Outfit"
+import {Limirator} from "./places/Limirator"
 
 require("dotenv").config()
 
@@ -171,6 +172,10 @@ bot.on(message("text"), async (ctx) => {
     }
 
     if (await Items.exec(ctx)) {
+        return
+    }
+
+    if (await Limirator.exec(ctx)) {
         return
     }
 })
